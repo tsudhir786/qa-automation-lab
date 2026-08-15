@@ -29,20 +29,6 @@ public class FirstSeleniumTest {
 
         searchBox.sendKeys("Selenium Webdriver");
 
-  /*      WebElement feelingLuckyButton =
-                driver.findElement(By.name("btnI"));*/
-
-        WebElement feelingLuckyButton =
-                driver.findElement(By.name("btnI"));
-
-        System.out.println(
-                "Displayed: " + feelingLuckyButton.isDisplayed()
-        );
-
-        System.out.println(
-                "Enabled: " + feelingLuckyButton.isEnabled()
-        );
-
         List<WebElement> feelingLuckyButtons =
                 driver.findElements(By.name("btnI"));
 
@@ -64,8 +50,6 @@ public class FirstSeleniumTest {
                         .orElseThrow();
 
         visibleFeelingLuckyButton.click();
-
-//        feelingLuckyButton.click();
 
         driver.quit();
     }
