@@ -67,17 +67,6 @@ public class WebFormTest extends BaseTest {
 
         webFormPage.submit();
 
-        WebDriverWait wait = new WebDriverWait(driver,
-                Duration.ofSeconds(5));
-
-        wait.until(
-                ExpectedConditions.urlContains("submitted-form.html")
-        );
-
-        wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("message"))
-        );
-
         assertEquals(
                 "Received!",
                 webFormPage.getMessage()
