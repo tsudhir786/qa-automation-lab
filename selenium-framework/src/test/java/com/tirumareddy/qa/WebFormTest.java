@@ -1,90 +1,71 @@
 package com.tirumareddy.qa;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WebFormTest extends BaseTest {
+    private WebFormPage webFormPage;
+
+    @BeforeEach
+    void initializePage() {
+        webFormPage = new WebFormPage(driver);
+    }
 
     @Test
     void shouldEnterText() {
 
-        WebElement textInput =
-                driver.findElement(By.xpath("//input[@id='my-text-id']"));
-
-        textInput.sendKeys("Selenium Framework");
+        webFormPage.enterText("Selenium Framework");
 
         assertEquals(
                 "Selenium Framework",
-                textInput.getDomProperty("value")
+                webFormPage.getTextValue()
         );
     }
 
     @Test
     void shouldSelectCheckbox() {
 
-        WebElement checkbox =
-                driver.findElement(By.cssSelector("#my-check-2"));
+        assertFalse(webFormPage.isCheckboxSelected());
 
-        assertFalse(checkbox.isSelected());
+        webFormPage.selectCheckbox();
 
-        checkbox.click();
-
-        assertTrue(checkbox.isSelected());
+        assertTrue(webFormPage.isCheckboxSelected());
     }
 
     @Test
     void shouldSelectRadioButton() {
 
-        WebElement radioButton =
-                driver.findElement(By.id("my-radio-2"));
+        assertFalse(webFormPage.isRadiButtonSelected());
 
-        assertFalse(radioButton.isSelected());
+        webFormPage.selectRadiButton();
 
-        radioButton.click();
-
-        assertTrue(radioButton.isSelected());
+        assertTrue(webFormPage.isRadiButtonSelected());
     }
 
     @Test
     void shouldSelectDropdownOption() {
 
-        WebElement dropdownElement =
-                driver.findElement(By.cssSelector(".form-select"));
-
-        Select dropdown = new Select(dropdownElement);
-
-        dropdown.selectByVisibleText("Two");
-
+        webFormPage.selectDropdown("Two");
         assertEquals(
                 "Two",
-                dropdown.getFirstSelectedOption().getText()
+                webFormPage.getSelectedDropdownOption()
         );
     }
 
     @Test
     void shouldSubmitFormSuccessfully() {
+        webFormPage.enterText("Sudhir");
 
-        WebElement textInput =
-                driver.findElement(By.name("my-text"));
-
-        textInput.sendKeys("Sudhir");
-
-        WebElement submitButton =
-                driver.findElement(By.tagName("button"));
-
-        submitButton.click();
+        webFormPage.submit();
 
         WebDriverWait wait = new WebDriverWait(driver,
                 Duration.ofSeconds(5));
@@ -97,13 +78,9 @@ public class WebFormTest extends BaseTest {
                 ExpectedConditions.visibilityOfElementLocated(By.id("message"))
         );
 
-        WebElement message =
-                driver.findElement(By.id("message"));
-
         assertEquals(
                 "Received!",
-                message.getText()
+                webFormPage.getMessage()
         );
-
     }
 }
