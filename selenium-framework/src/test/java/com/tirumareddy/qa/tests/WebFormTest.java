@@ -64,7 +64,7 @@ public class WebFormTest extends BaseTest {
         webFormPage.enterText("Sudhir");
 
         webFormPage.submit();
-
+//Testing the screenshot failure
         assertEquals(
                 "Received Wrong!",
                 webFormPage.getMessage()
