@@ -1,5 +1,6 @@
-package com.tirumareddy.qa;
+package com.tirumareddy.qa.base;
 
+import com.tirumareddy.qa.driver.DriverFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
@@ -9,11 +10,13 @@ import java.time.Duration;
 
 public class BaseTest {
     protected WebDriver driver;
-    static String test = "test value";
 
     @BeforeEach
     void setup() {
-        driver = new ChromeDriver();
+        String browser =
+                System.getProperty("browser", "chrome");
+
+        driver = DriverFactory.createDriver(browser);
 
         driver.manage()
                 .timeouts()
@@ -22,6 +25,10 @@ public class BaseTest {
         driver.get(
                 "https://www.selenium.dev/selenium/web/web-form.html"
         );
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
     @AfterEach

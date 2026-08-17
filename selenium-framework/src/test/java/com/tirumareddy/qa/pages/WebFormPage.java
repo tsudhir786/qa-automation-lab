@@ -1,10 +1,8 @@
-package com.tirumareddy.qa;
+package com.tirumareddy.qa.pages;
 
 import com.tirumareddy.qa.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
