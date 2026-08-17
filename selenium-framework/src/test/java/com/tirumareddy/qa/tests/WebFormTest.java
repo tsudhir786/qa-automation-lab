@@ -66,7 +66,7 @@ public class WebFormTest extends BaseTest {
         webFormPage.submit();
 
         assertEquals(
-                "Received!",
+                "Received Wrong!",
                 webFormPage.getMessage()
         );
     }
