@@ -1,26 +1,25 @@
 package com.tirumareddy.qa;
 
+import com.tirumareddy.qa.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 public class WebFormPage {
 
-    private final WebDriverWait wait;
     private final WebDriver driver;
+    private final WaitUtils waitUtils;
 
     public WebFormPage(WebDriver driver) {
         this.driver = driver;
-        this.wait =
-                new WebDriverWait(
+        this.waitUtils =
+                new WaitUtils(
                         this.driver,
-                        Duration.ofSeconds(5)
-                );
+                        Duration.ofSeconds(5));
     }
 
     private final By textInput =
@@ -47,14 +46,15 @@ public class WebFormPage {
     }
 
     public void submit() {
-        driver.findElement(submitButton).click();
+        waitUtils
+                .waitForClickable(submitButton)
+                .click();
     }
 
     public String getMessage() {
-        wait.until(
-                ExpectedConditions.visibilityOfElementLocated(message)
-        );
-        return driver.findElement(message).getText();
+        return waitUtils
+                .waitForVisibility(message)
+                .getText();
     }
 
     public String getTextValue() {

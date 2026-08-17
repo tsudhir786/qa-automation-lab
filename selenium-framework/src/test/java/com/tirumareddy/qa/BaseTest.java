@@ -9,6 +9,7 @@ import java.time.Duration;
 
 public class BaseTest {
     protected WebDriver driver;
+    static String test = "test value";
 
     @BeforeEach
     void setup() {
