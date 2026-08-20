@@ -7,11 +7,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(TestFailureWatcher.class)
 public class WebFormTest extends BaseTest {
     private WebFormPage webFormPage;
+    private static String test1 = "Test initialization";
 
     @BeforeEach
     void initializePage() {
@@ -50,12 +53,22 @@ public class WebFormTest extends BaseTest {
     }
 
     @Test
-    void shouldSelectDropdownOption() {
+    void shouldDisplayExpectedDropdownOptions() {
 
-        webFormPage.selectDropdown("Two");
+        List<String> expectedOptions =
+                List.of(
+                        "Open this select menu",
+                        "One",
+                        "Two",
+                        "Three"
+                );
+
+        List<String> actualOptions =
+                webFormPage.getDropdownOptions();
+
         assertEquals(
-                "Two",
-                webFormPage.getSelectedDropdownOption()
+                expectedOptions,
+                actualOptions
         );
     }
 
@@ -66,7 +79,7 @@ public class WebFormTest extends BaseTest {
         webFormPage.submit();
 //Testing the screenshot failure
         assertEquals(
-                "Received Wrong!",
+                "Received!",
                 webFormPage.getMessage()
         );
     }

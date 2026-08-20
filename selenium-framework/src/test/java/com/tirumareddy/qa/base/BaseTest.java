@@ -10,6 +10,7 @@ import java.time.Duration;
 
 public class BaseTest {
     protected WebDriver driver;
+    private static String test2 = "Test initialization";
 
     @BeforeEach
     void setup() {
@@ -35,6 +36,7 @@ public class BaseTest {
     void tearDown() {
         if (driver != null) {
             driver.quit();
+            driver.close();
         }
     }
 }

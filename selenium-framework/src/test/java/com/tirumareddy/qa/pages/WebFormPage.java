@@ -3,14 +3,17 @@ package com.tirumareddy.qa.pages;
 import com.tirumareddy.qa.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
+import java.util.List;
 
 public class WebFormPage {
 
     private final WebDriver driver;
     private final WaitUtils waitUtils;
+    private static String test3 = "Test initialization";
 
     public WebFormPage(WebDriver driver) {
         this.driver = driver;
@@ -64,6 +67,16 @@ public class WebFormPage {
         Select select =
                 new Select(driver.findElement(dropdownLocator));
         select.selectByVisibleText(option);
+    }
+
+    public List<String> getDropdownOptions() {
+        Select select =
+                new Select(driver.findElement(dropdownLocator));
+
+        return select.getOptions()
+                .stream()
+                .map(WebElement::getText)
+                .toList();
     }
 
     public void selectRadiButton() {

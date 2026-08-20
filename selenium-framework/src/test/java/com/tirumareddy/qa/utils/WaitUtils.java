@@ -11,6 +11,7 @@ import java.time.Duration;
 public class WaitUtils {
 
     private final WebDriverWait wait;
+    private static String test4 = "Test initialization";
 
     public WaitUtils(WebDriver driver, Duration timeout) {
         this.wait = new WebDriverWait(driver, timeout);
