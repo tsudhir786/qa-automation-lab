@@ -6,7 +6,10 @@ import com.tirumareddy.qa.utils.TestFailureWatcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -79,8 +82,20 @@ public class WebFormTest extends BaseTest {
         webFormPage.submit();
 //Testing the screenshot failure
         assertEquals(
-                "Received!",
+                "Received Wrong!",
                 webFormPage.getMessage()
         );
+    }
+
+    @Test
+    void shouldDisplayExpectedRadioButtons() {
+
+        List<String> expectedIds =
+                List.of("my-radio-1", "my-radio-2");
+
+        List<String> actualIds =
+                webFormPage.getRadioButtonIds();
+
+        assertEquals(expectedIds, actualIds);
     }
 }

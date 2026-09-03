@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WebFormPage {
@@ -28,6 +29,7 @@ public class WebFormPage {
 
     private final By checkbox =
             By.id("my-check-2");
+
 
     private final By radioButton =
             By.id("my-radio-2");
@@ -103,5 +105,21 @@ public class WebFormPage {
     public boolean isRadiButtonSelected() {
         return driver.findElement(radioButton)
                 .isSelected();
+    }
+
+    public List<String> getRadioButtonIds() {
+
+        List<WebElement> radioButtons = driver
+                .findElements(
+                        By.cssSelector("input[type='radio'")
+                );
+
+        List<String> ids = new ArrayList<>();
+
+        for (WebElement radio : radioButtons) {
+            ids.add(radio.getDomAttribute("id"));
+        }
+
+        return ids;
     }
 }

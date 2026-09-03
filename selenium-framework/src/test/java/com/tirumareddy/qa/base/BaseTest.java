@@ -36,7 +36,6 @@ public class BaseTest {
     void tearDown() {
         if (driver != null) {
             driver.quit();
-            driver.close();
         }
     }
 }
